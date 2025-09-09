@@ -4,16 +4,14 @@ import { Link, useLocation } from 'react-router-dom';
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const location = useLocation();
 
   const navItems = [
-    { id: 'home', label: 'Home', href: '#' },
-    { id: 'about', label: 'About', href: '#about' },
-    { id: 'experience', label: 'Career', href: '#experience' },
-    { id: 'projects', label: 'Projects', href: '#projects' },
-    { id: 'blog', label: 'Blog', href: 'https://soldier0x00.medium.com/', external: true },
-    { id: 'threat-console', label: 'Threat Intel', href: '#threat-console' },
-    { id: 'contact', label: 'Contact', href: '#contact' }
+    { id: 'home', label: 'Home', href: '/', external: false },
+    { id: 'projects', label: 'Projects', href: '/projects', external: false },
+    { id: 'threat-intel', label: 'Threat Intel', href: '/threat-intel', external: false },
+    { id: 'youtube', label: 'YouTube', href: '/youtube', external: false },
+    { id: 'blog', label: 'Blog', href: 'https://soldier0x00.medium.com/', external: true }
   ];
 
   useEffect(() => {

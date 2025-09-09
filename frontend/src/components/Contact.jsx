@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { trackEvent } from '../hooks/useAnalytics';
 
 const Contact = () => {
   const [copiedEmail, setCopiedEmail] = useState(false);
@@ -7,10 +8,15 @@ const Contact = () => {
     try {
       await navigator.clipboard.writeText('cybersoldier0x00@protonmail.com');
       setCopiedEmail(true);
+      trackEvent('email_copied', { source: 'contact_section' });
       setTimeout(() => setCopiedEmail(false), 2000);
     } catch (err) {
       console.log('Clipboard API not available');
     }
+  };
+
+  const handleContactClick = (platform) => {
+    trackEvent('contact_click', { platform, source: 'contact_section' });
   };
 
   const primaryContacts = [
@@ -37,22 +43,46 @@ const Contact = () => {
     {
       platform: 'Twitter',
       username: '@soldier0x00',
-      href: 'https://x.com/soldier0x00'
+      href: 'https://x.com/soldier0x00',
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      ),
+      color: 'text-gray-400 hover:text-white'
     },
     {
       platform: 'Medium',
       username: 'Technical Articles',
-      href: 'https://soldier0x00.medium.com/'
+      href: 'https://soldier0x00.medium.com/',
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+        </svg>
+      ),
+      color: 'text-gray-400 hover:text-white'
     },
     {
       platform: 'TryHackMe',
       username: 'soldier0x00',
-      href: 'https://tryhackme.com/p/soldier0x00'
+      href: 'https://tryhackme.com/p/soldier0x00',
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10.705 0C7.54 0 4.902 2.285 4.349 5.291c4.071.51 7.969 1.598 11.473 3.19-1.348-5.2-5.852-8.481-10.717-8.481h-.4zm2.43 6.408c-3.236-1.376-6.878-2.343-10.655-2.801.05 4.71 2.441 8.985 6.347 11.746 2.267 1.598 4.808 2.493 7.447 2.646-1.725-3.896-2.372-7.789-3.139-11.591zM24 11.592c-.886-3.393-3.636-6.169-7.084-7.18.767 3.801 1.415 7.695 3.139 11.591 2.64-.152 5.18-1.048 7.447-2.646C23.559 10.395 24 8.85 24 7.078v4.514z"/>
+        </svg>
+      ),
+      color: 'text-gray-400 hover:text-green-400'
     },
     {
       platform: 'Instagram',
       username: '@harsha_soldier0x00',
-      href: 'https://www.instagram.com/harsha_soldier0x00'
+      href: 'https://www.instagram.com/harsha_soldier0x00',
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      ),
+      color: 'text-gray-400 hover:text-pink-400'
     }
   ];
 
@@ -159,6 +189,7 @@ const Contact = () => {
                             href={contact.href}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() => handleContactClick(contact.title)}
                             className="flex items-center justify-center px-6 py-3 border border-gray-600 hover:border-gray-500 rounded-lg transition-all duration-300 hover:scale-105 text-gray-300 hover:text-white font-medium text-sm"
                           >
                             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -185,33 +216,16 @@ const Contact = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-3 px-6 py-4 bg-gray-800/50 hover:bg-gray-800/80 border border-gray-700/50 hover:border-gray-600 rounded-xl transition-all duration-300 hover:scale-105 text-gray-400 hover:text-white backdrop-blur-sm"
+                  onClick={() => handleContactClick(social.platform)}
+                  className={`flex items-center space-x-3 px-6 py-4 bg-gray-800/50 hover:bg-gray-800/80 border border-gray-700/50 hover:border-gray-600 rounded-xl transition-all duration-300 hover:scale-105 ${social.color} backdrop-blur-sm`}
                 >
+                  {social.icon}
                   <div className="text-left">
                     <div className="text-sm font-medium text-white">{social.platform}</div>
                     <div className="text-xs text-gray-400">{social.username}</div>
                   </div>
                 </a>
               ))}
-            </div>
-          </div>
-
-          {/* Professional CTA */}
-          <div className="mt-16 text-center">
-            <div className="inline-block bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700/50 rounded-2xl p-8 backdrop-blur-sm">
-              <h3 className="text-lg font-bold text-white mb-2">Looking for collaboration?</h3>
-              <p className="text-gray-400 text-sm mb-6 max-w-md mx-auto">
-                I'm always interested in discussing cybersecurity projects, research collaborations, or speaking opportunities.
-              </p>
-              <a
-                href="mailto:cybersoldier0x00@protonmail.com?subject=Collaboration%20Opportunity"
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 text-black font-bold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-cyan-500/25"
-              >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                Start a Conversation
-              </a>
             </div>
           </div>
         </div>

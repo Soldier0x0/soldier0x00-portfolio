@@ -31,6 +31,12 @@ const Navigation = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const isActive = (href) => {
+    if (href === '/' && location.pathname === '/') return true;
+    if (href !== '/' && location.pathname === href) return true;
+    return false;
+  };
+
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -52,19 +58,29 @@ const Navigation = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.href, item.external)}
-                  className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 hover:text-cyan-400 min-h-[40px] ${
-                    activeSection === item.id ? 'text-cyan-400' : 'text-gray-300'
-                  }`}
-                >
-                  {item.label}
-                  {item.external && <span className="ml-1 text-xs">↗</span>}
-                  {activeSection === item.id && !item.external && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
-                  )}
-                </button>
+                item.external ? (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavigation(item.href, item.external)}
+                    className="relative px-3 py-2 text-sm font-medium transition-all duration-300 hover:text-cyan-400 min-h-[40px] text-gray-300"
+                  >
+                    {item.label}
+                    <span className="ml-1 text-xs">↗</span>
+                  </button>
+                ) : (
+                  <Link
+                    key={item.id}
+                    to={item.href}
+                    className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 hover:text-cyan-400 min-h-[40px] ${
+                      isActive(item.href) ? 'text-cyan-400' : 'text-gray-300'
+                    }`}
+                  >
+                    {item.label}
+                    {isActive(item.href) && (
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+                    )}
+                  </Link>
+                )
               ))}
             </div>
 
@@ -100,19 +116,15 @@ const Navigation = () => {
             <div className="container mx-auto px-4 sm:px-6 py-4">
               <div className="space-y-1">
                 {navItems.map((item, index) => (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.href, item.external)}
-                    className={`block w-full text-left px-4 py-4 rounded-lg transition-all duration-300 hover:bg-cyan-400/10 min-h-[48px] flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-cyan-400/50 ${
-                      activeSection === item.id 
-                        ? 'text-cyan-400 bg-cyan-400/10' 
-                        : 'text-gray-300'
-                    }`}
-                    tabIndex={isMobileMenuOpen ? 0 : -1}
-                    style={{ transitionDelay: `${index * 50}ms` }}
-                  >
-                    <span className="font-medium">{item.label}</span>
-                    {item.external && (
+                  item.external ? (
+                    <button
+                      key={item.id}
+                      onClick={() => handleNavigation(item.href, item.external)}
+                      className="block w-full text-left px-4 py-4 rounded-lg transition-all duration-300 hover:bg-cyan-400/10 min-h-[48px] flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-cyan-400/50 text-gray-300"
+                      tabIndex={isMobileMenuOpen ? 0 : -1}
+                      style={{ transitionDelay: `${index * 50}ms` }}
+                    >
+                      <span className="font-medium">{item.label}</span>
                       <span className="text-xs opacity-60">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -120,8 +132,23 @@ const Navigation = () => {
                           <line x1="10" y1="14" x2="21" y2="3"></line>
                         </svg>
                       </span>
-                    )}
-                  </button>
+                    </button>
+                  ) : (
+                    <Link
+                      key={item.id}
+                      to={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`block w-full text-left px-4 py-4 rounded-lg transition-all duration-300 hover:bg-cyan-400/10 min-h-[48px] flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-cyan-400/50 ${
+                        isActive(item.href) 
+                          ? 'text-cyan-400 bg-cyan-400/10' 
+                          : 'text-gray-300'
+                      }`}
+                      tabIndex={isMobileMenuOpen ? 0 : -1}
+                      style={{ transitionDelay: `${index * 50}ms` }}
+                    >
+                      <span className="font-medium">{item.label}</span>
+                    </Link>
+                  )
                 ))}
               </div>
             </div>

@@ -23,26 +23,10 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href, external = false) => {
+  const handleNavigation = (href, external = false) => {
     if (external) {
       window.open(href, '_blank', 'noopener,noreferrer');
       return;
-    }
-    
-    if (href === '#') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.querySelector(href);
-      if (element) {
-        const offset = 80; // Account for fixed navbar
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
     }
     setIsMobileMenuOpen(false);
   };

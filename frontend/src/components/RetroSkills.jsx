@@ -153,10 +153,6 @@ const RetroSkills = () => {
               </button>
             ))}
           </div>
-                {category.title}
-              </button>
-            ))}
-          </div>
 
           {/* Skills Grid */}
           <div className="bg-black/80 backdrop-blur-sm border-2 border-green-400/30 rounded-xl p-8 retro-card">

@@ -284,12 +284,6 @@ const RetroProjects = () => {
                 </div>
               </div>
             </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
 
             {/* Project Details */}
             <div className="lg:col-span-2">

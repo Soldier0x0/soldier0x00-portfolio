@@ -194,7 +194,8 @@ const InteractiveTerminalHero = () => {
             </div>
           </div>
 
-          {/* Right Side - Enhanced Interactive Terminal */}
+          {/* Right Side - Enhanced Interactive Terminal - HIDDEN FOR NOW */}
+          {/* UNCOMMENT TO SHOW TERMINAL AGAIN
           <div className="order-1 lg:order-2 py-8 lg:py-0">
             <div className="max-w-full overflow-hidden">
               <EnhancedTerminal 
@@ -203,6 +204,7 @@ const InteractiveTerminalHero = () => {
               />
             </div>
           </div>
+          */}
         </div>
       </div>
 

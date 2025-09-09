@@ -9,7 +9,6 @@ const Navigation = () => {
   const navItems = [
     { id: 'home', label: 'Home', href: '/', external: false },
     { id: 'projects', label: 'Projects', href: '/projects', external: false },
-    { id: 'threat-intel', label: 'Threat Intel', href: '/threat-intel', external: false },
     { id: 'youtube', label: 'YouTube', href: '/youtube', external: false },
     { id: 'blog', label: 'Blog', href: 'https://soldier0x00.medium.com/', external: true }
   ];

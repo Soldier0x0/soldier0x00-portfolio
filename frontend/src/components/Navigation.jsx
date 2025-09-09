@@ -159,7 +159,7 @@ const Navigation = () => {
       {/* Scroll to Top Button */}
       {isScrolled && (
         <button
-          onClick={() => scrollToSection('#')}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="fixed bottom-6 right-6 z-40 w-12 h-12 bg-cyan-500 text-black rounded-full shadow-lg hover:bg-cyan-400 hover:scale-110 transition-all duration-300 hover:shadow-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 active:scale-95"
           aria-label="Scroll to top"
         >

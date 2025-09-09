@@ -427,7 +427,7 @@ const EnhancedTerminal = ({ onCommand, className = "" }) => {
           <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
           <div className="w-3 h-3 bg-green-400 rounded-full"></div>
         </div>
-        <div className="text-green-400 text-xs tracking-wider">SECURE_TERMINAL_v3.0</div>
+        {/* <div className="text-green-400 text-xs tracking-wider">SECURE_TERMINAL_v3.0</div> */}
       </div>
 
       {/* Terminal Body */}

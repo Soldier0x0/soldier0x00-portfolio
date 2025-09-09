@@ -179,7 +179,7 @@ const InteractiveTerminalHero = () => {
               {/* CTA Button */}
               <button
                 className="w-full sm:w-auto min-h-[48px] px-6 lg:px-8 py-3 lg:py-4 bg-gradient-to-r from-green-500 to-cyan-500 text-black font-bold text-sm sm:text-base lg:text-lg rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-green-500/50 focus:outline-none focus:ring-4 focus:ring-green-500/50 font-mono tracking-wider active:scale-95"
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => window.location.href = '/projects'}
               >
                 JACK_IN >>
               </button>

@@ -166,13 +166,13 @@ const InteractiveTerminalHero = () => {
               {/* Description */}
               <div className="text-gray-300 leading-relaxed space-y-3 lg:space-y-4 mb-6 lg:mb-8">
                 <p className="text-xs sm:text-sm lg:text-base xl:text-lg">
-                  <span className="text-gray-400">></span> Engineering secure data architectures with Java, NiFi & AI
+                  <span className="text-gray-400">&gt;</span> Engineering secure data architectures with Java, NiFi & AI
                 </p>
                 <p className="text-xs sm:text-sm lg:text-base xl:text-lg">
-                  <span className="text-gray-400">></span> Learning ML algorithms to enhance threat detection
+                  <span className="text-gray-400">&gt;</span> Learning ML algorithms to enhance threat detection
                 </p>
                 <p className="text-xs sm:text-sm lg:text-base xl:text-lg">
-                  <span className="text-gray-400">></span> Mastering data parsing to revolutionize cybersecurity
+                  <span className="text-gray-400">&gt;</span> Mastering data parsing to revolutionize cybersecurity
                 </p>
               </div>
 
